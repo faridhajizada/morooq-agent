@@ -26,7 +26,7 @@ function SignIn() {
 
       dispatch(setAuth({ AccessToken }));
 
-      navigate("/dashboard");
+      navigate("/agent");
     } catch (error) {
       console.error("Error:", error);
 

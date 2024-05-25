@@ -2,7 +2,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import PrivateRouter from "./HOC/PrivateRouter";
 import Login from "./pages/Login/Login";
 // import StudentTable from './pages/StudentTable/StudentTable';
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Agent from "./pages/Agent/Agent";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import SendEmailForgotPassword from "./pages/Login/SendEmailForgotPassword";
 import ValidResetPassword from "./pages/Login/ValidResetPassword";
@@ -27,10 +27,10 @@ function App() {
         />
 
         <Route
-          path={`/dashboard/*`}
+          path={`/agent/*`}
           element={
             <PrivateRouter>
-              <Dashboard />
+              <Agent />
             </PrivateRouter>
           }
         />

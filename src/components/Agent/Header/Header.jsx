@@ -12,7 +12,7 @@ function Header() {
             <div className="imgLogo">
               <Link to={'/'}>
                 <img
-                  src="https://barattson.feridhacizade.com/back/dist/img/logo-favicon/1697923827_53375_larablog_logo.png"
+                  src=""
                   alt="logo"
                 />
               </Link>

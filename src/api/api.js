@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 export const baseQuery = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://morooq.az/webservice/api/auth/agent",
+    baseUrl: "http://morooq.az/webservice/api/",
   }),
   endpoints: () => ({}),
   prepareHeaders: (headers) => {

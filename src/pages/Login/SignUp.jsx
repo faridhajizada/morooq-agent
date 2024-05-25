@@ -45,8 +45,8 @@ function SignUp() {
         <div className={s.signUp}>
           <div className={s.form}>
             {error && <div className={s.error}>{error}</div>}
-            <div class="form-group choose_type">
-              <label for="agentTypePhysical">
+            <div>
+              <label htmlFor="agentTypePhysical">
                 <input
                   id="agentTypePhysical"
                   name="agentType"
@@ -56,7 +56,7 @@ function SignUp() {
                 />
                 <span>Physical entity</span>
               </label>
-              <label for="agentTypeLegal">
+              <label htmlFor="agentTypeLegal">
                 <input
                   id="agentTypeLegal"
                   name="agentType"

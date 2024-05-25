@@ -1,10 +1,10 @@
 import { baseQuery } from "./api";
 
-export const autApi = baseQuery.injectEndpoints({
+export const authApi = baseQuery.injectEndpoints({
   endpoints: (builder) => ({
     signIn: builder.mutation({
       query: (user) => ({
-        url: "/sign-in",
+        url: "auth/agent/sign-in",
         user,
         method: "POST",
         body: user,
@@ -13,14 +13,14 @@ export const autApi = baseQuery.injectEndpoints({
     }),
     sendEmailForgotPassword: builder.mutation({
       query: ({ Email }) => ({
-        url: `/send-email-forgot-password?email=${encodeURIComponent(Email)}`,
+        url: `auth/agent/send-email-forgot-password?email=${encodeURIComponent(Email)}`,
         method: "POST",
         providesTags: ["User"],
       }),
     }),
     validateResetPassword: builder.mutation({
       query: ({ Email, Code }) => ({
-        url: `/validate-reset-password?email=${encodeURIComponent(
+        url: `auth/agent/validate-reset-password?email=${encodeURIComponent(
           Email
         )}&code=${encodeURIComponent(Code)}`,
         method: "POST",
@@ -29,7 +29,7 @@ export const autApi = baseQuery.injectEndpoints({
     }),
     changeForgotPassword: builder.mutation({
       query: (changePasswordDto) => ({
-        url: "/change-forgot-password",
+        url: "auth/agent/change-forgot-password",
         method: "POST",
         body: changePasswordDto,
       }),
@@ -43,4 +43,4 @@ export const {
   useSendEmailForgotPasswordMutation,
   useValidateResetPasswordMutation,
   useChangeForgotPasswordMutation,
-} = autApi;
+} = authApi;
