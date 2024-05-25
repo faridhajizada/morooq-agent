@@ -1,0 +1,12 @@
+header {
+  background-color: rgb(37, 29, 144);
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .userInfo {
+    color: red;
+    font-size: 30px;
+  }
+}

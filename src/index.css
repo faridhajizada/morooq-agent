@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+
+.react-calendar__navigation {
+  background-color: black;
+}
+
+.react-calendar {
+  margin: 0 auto;
+}

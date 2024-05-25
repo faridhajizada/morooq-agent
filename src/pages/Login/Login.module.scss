@@ -1,0 +1,173 @@
+.loginPage {
+  width: 100%;
+  height: 100vh;
+  background-image: url(./../../assets/auth.png);
+  background-size: cover;
+
+  .loginContainer {
+    .loginForm {
+      position: absolute;
+      width: 345px;
+      background: linear-gradient(-45deg, #a9508a, #ec2a7b);
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+      border-radius: 7px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      text-align: center;
+      color: white;
+
+      .headerButton {
+        display: flex;
+        padding: 4px;
+
+        button {
+          width: 100%;
+          background-color: #fff;
+          color: #a8518a;
+          padding: 0.375rem 0.75rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s, color 0.3s;
+
+          &.active {
+            background-color: #a8518a00;
+            color: #fff;
+          }
+        }
+      }
+
+      .formContent {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.5s ease-in-out;
+
+        .form {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out;
+        }
+
+        .show {
+          opacity: 1;
+        }
+
+        .hide {
+          opacity: 0;
+        }
+      }
+
+      .signIn,
+      .signUp {
+        input,
+        select,
+        option {
+          width: 100%;
+          margin: 10px 0;
+          background: transparent;
+          border: none;
+          outline: none;
+          border-bottom: 3px solid white;
+          color: white;
+        }
+        input::placeholder {
+          color: white;
+          font-size: 12px;
+        }
+
+        .form {
+          padding: 0 1.25rem;
+          button {
+            background-color: #fff;
+            color: #a8518a;
+            padding: 0.375rem 0.75rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            transition: color 0.15s ease-in-out,
+              background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+              box-shadow 0.15s ease-in-out;
+            font-size: 1rem;
+            opacity: 0.65;
+            margin: 10px 0 0px 0;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+          }
+
+          button:hover {
+            background-color: #ec2a7b;
+            border-color: #ec2a7b;
+            color: #fff;
+            opacity: 0.65;
+          }
+        }
+
+        .bottomLogin {
+          padding: 0 1.25rem 1.25rem 1.25rem;
+          .forgotPass,
+          .or {
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            color: #fff;
+            a {
+              color: #fff;
+              text-decoration: none;
+            }
+          }
+          .googleIcon {
+            display: flex;
+            justify-content: center;
+          }
+          .googleIconBorder {
+            border: 1px solid;
+            border-radius: 50%;
+            width: 2.2rem;
+            height: 2.2rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .error {
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
+
+    .preloader-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .preloader {
+      border: 8px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 8px solid #3498db;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
