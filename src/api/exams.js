@@ -1,7 +1,4 @@
 import { baseQuery } from "./api";
-import Cookies from "js-cookie";
-
-const token = Cookies.get("token");
 
 export const exams = baseQuery.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,10 +6,15 @@ export const exams = baseQuery.injectEndpoints({
       query: () => ({
         url: `exams/all`,
         method: "GET",
+      }),
+    }),
+    eventItems: builder.query({
+      query: (examId) => ({
+        url: `agent/eventitems`,
+        method: "GET",
+        params: { examId },
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       }),
     }),
@@ -20,4 +22,4 @@ export const exams = baseQuery.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useExamsQuery } = exams;
+export const { useExamsQuery, useEventItemsQuery } = exams;

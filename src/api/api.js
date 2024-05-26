@@ -10,6 +10,7 @@ export const baseQuery = createApi({
     const AccessToken = Cookies.get("AccessToken");
     if (AccessToken) {
       headers.set("authorization", `Bearer ${AccessToken}`);
+      
     }
     return headers;
   },
