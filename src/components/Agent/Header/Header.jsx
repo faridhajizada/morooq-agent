@@ -1,7 +1,7 @@
-import { Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import LogOut from './../../LogOut/LogOut';
-import s from './Header.module.scss';
+import { Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import LogOut from "./../../LogOut/LogOut";
+import s from "./Header.module.scss";
 
 function Header() {
   return (
@@ -9,13 +9,9 @@ function Header() {
       <Container fluid>
         <Row>
           <div className={s.header}>
-            <div className="imgLogo">
-              <Link to={'/'}>
-                <img
-                  src=""
-                  alt="logo"
-                />
-              </Link>
+            <div className={s.title}>
+              <strong>morooq</strong>
+              <span>exams</span>
             </div>
             <div className={s.userInfo}>
               <LogOut />

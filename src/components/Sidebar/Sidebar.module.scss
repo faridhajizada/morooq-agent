@@ -4,4 +4,26 @@
   height: 100vh;
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+
+  .sidebar__list {
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar__item {
+    list-style: none;
+    a {
+      text-decoration: none;
+      color: #686a76;
+      display: block;
+      padding: 10px 20px;
+      transition: 0.3s;
+      p {
+        margin: 0;
+      }
+      &:hover {
+        background: linear-gradient(45deg, #a9508a, #ec2a7b);
+        color: white;
+      }
+    }
+  }
 }

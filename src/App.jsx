@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import PrivateRouter from "./HOC/PrivateRouter";
 import Login from "./pages/Login/Login";
-// import StudentTable from './pages/StudentTable/StudentTable';
 import Agent from "./pages/Agent/Agent";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import SendEmailForgotPassword from "./pages/Login/SendEmailForgotPassword";
@@ -14,7 +13,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<StudentTable />} /> */}
         <Route path="/" element={<Login />} />
         <Route
           path="/send-email-forgot-password"

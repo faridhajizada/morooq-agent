@@ -4,6 +4,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .title {
+      color: white;
+      font-size: 24px;
+      font-weight: 200;
+    }
   }
   .userInfo {
     color: red;

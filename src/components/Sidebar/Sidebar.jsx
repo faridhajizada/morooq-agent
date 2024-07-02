@@ -4,23 +4,34 @@ import s from "./Sidebar.module.scss";
 const sidebarData = [
   {
     id: 1,
-    name: "Profile Info",
-    path: "/dashboard/profile-info",
+    name: "Acquire tickets",
+    path: "/agent/acquire-tickets",
   },
   {
     id: 2,
-    name: "Add Employer",
-    path: "/dashboard/add-employer",
+    name: "Share tickets",
+    path: "/agent/share-tickets",
   },
   {
     id: 3,
-    name: "List Employer",
-    path: "/dashboard/list-employer",
+    name: "My shared tickets",
+    path: "/agent/my-shared-tickets",
   },
   {
     id: 4,
-    name: "Create Table",
-    path: "/dashboard/create-table",
+    name: "View student's results",
+    path: "/agent/view-student's results",
+  },
+
+  {
+    id: 5,
+    name: "Personal details",
+    path: "/agent/personal-details",
+  },
+  {
+    id: 6,
+    name: "Settings",
+    path: "/agent/settings",
   },
 ];
 
