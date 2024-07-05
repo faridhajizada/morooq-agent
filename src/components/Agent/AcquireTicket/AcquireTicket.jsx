@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useExamsQuery, useEventItemsQuery } from "./../../../api/exams";
+import s from "./AcquireTicket.module.scss";
 
 function AcquireTicket() {
   const { data: exams } = useExamsQuery();
-  const [language, setLanguage] = useState("0");
   const [selectedExam, setSelectedExam] = useState("");
   const [quantities, setQuantities] = useState({});
 
@@ -11,7 +11,6 @@ function AcquireTicket() {
     skip: !selectedExam,
   });
 
-  const handleLanguageChange = (e) => setLanguage(e.target.value);
   const handleExamChange = (e) => setSelectedExam(e.target.value);
   const handleQuantityChange = (e) => {
     const { name, value } = e.target;
@@ -42,26 +41,17 @@ function AcquireTicket() {
       <div className="title">
         <h1>Ticket acquisition</h1>
       </div>
-      <div className="languageSelect">
-        <label htmlFor="language">Language</label>
-        <select
-          id="language"
-          name="language"
-          value={language}
-          onChange={handleLanguageChange}
-        >
-          <option value="0" label="Choose language" disabled></option>
-          <option value="1">English</option>
-        </select>
-      </div>
 
       <div>
-        <label htmlFor="exam">Exam</label>
+        <label htmlFor="exam" style={{ fontSize: "20px", marginRight: "30px" }}>
+          Exam
+        </label>
         <select
           id="exam"
           name="exam"
           value={selectedExam}
           onChange={handleExamChange}
+          style={{ fontSize: "20px" }}
         >
           <option value="" label="Choose exam" disabled></option>
           {exams?.map((exam) => (
@@ -76,7 +66,7 @@ function AcquireTicket() {
         <div>
           <table>
             <thead>
-              <tr>
+              <tr style={{ textAlign: "center" }}>
                 <th>Item</th>
                 <th>Description</th>
                 <th>Ticket price</th>
@@ -109,7 +99,7 @@ function AcquireTicket() {
             </tbody>
           </table>
           <div>Total amount: ${calculateTotalAmount()}</div>
-          <button>Acquire</button>
+          <button className={s.acquireBtn}>Acquire</button>
         </div>
       )}
     </div>
