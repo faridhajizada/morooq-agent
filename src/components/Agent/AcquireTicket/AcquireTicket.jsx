@@ -37,12 +37,14 @@ function AcquireTicket() {
   }, [eventItems]);
 
   return (
-    <div>
-      <div className="title">
-        <h1>Ticket acquisition</h1>
+    <div className={s.acquireTicket}>
+      <div className={s.pageHeader}>
+        <div className={s.headerTitle}>
+          <h1>Ticket acquisition</h1>
+        </div>
       </div>
 
-      <div>
+      <div className={s.card}>
         <label htmlFor="exam" style={{ fontSize: "20px", marginRight: "30px" }}>
           Exam
         </label>
@@ -60,48 +62,49 @@ function AcquireTicket() {
             </option>
           ))}
         </select>
-      </div>
-
-      {eventItems && eventItems.length > 0 && (
-        <div>
-          <table>
-            <thead>
-              <tr style={{ textAlign: "center" }}>
-                <th>Item</th>
-                <th>Description</th>
-                <th>Ticket price</th>
-                <th>Package price</th>
-                <th>Quantity</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventItems.map((item) => (
-                <tr key={item.EventItemID}>
-                  <td>{item.EventItemID}</td>
-                  <td>{item.EventItemDesc}</td>
-                  <td>${item.TicketPrice}</td>
-                  <td>${item.EventItemPrice}</td>
-                  <td>
-                    <input
-                      type="number"
-                      name={item.EventItemID}
-                      value={quantities[item.EventItemID] || 0}
-                      onChange={handleQuantityChange}
-                      min="0"
-                    />
-                  </td>
-                  <td>
-                    ${(quantities[item.EventItemID] || 0) * item.EventItemPrice}
-                  </td>
+        {eventItems && eventItems.length > 0 && (
+          <div>
+            <div>Total amount: ${calculateTotalAmount()}</div>
+            <button className={s.acquireBtn}>Acquire</button>
+            <table>
+              <thead>
+                <tr style={{ textAlign: "center" }}>
+                  <th>Item</th>
+                  <th>Description</th>
+                  <th>Ticket price</th>
+                  <th>Package price</th>
+                  <th>Quantity</th>
+                  <th>Amount</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <div>Total amount: ${calculateTotalAmount()}</div>
-          <button className={s.acquireBtn}>Acquire</button>
-        </div>
-      )}
+              </thead>
+              <tbody>
+                {eventItems.map((item) => (
+                  <tr key={item.EventItemID}>
+                    <td>{item.EventItemID}</td>
+                    <td>{item.EventItemDesc}</td>
+                    <td>${item.TicketPrice}</td>
+                    <td>${item.EventItemPrice}</td>
+                    <td>
+                      <input
+                        type="number"
+                        name={item.EventItemID}
+                        value={quantities[item.EventItemID] || 0}
+                        onChange={handleQuantityChange}
+                        min="0"
+                      />
+                    </td>
+                    <td>
+                      $
+                      {(quantities[item.EventItemID] || 0) *
+                        item.EventItemPrice}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
