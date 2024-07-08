@@ -21,8 +21,10 @@ function SignIn() {
     try {
       const response = await loginUser({ Email: email, Password: password });
       const { AccessToken } = response.data;
+      const PersonID = response.data.PersonID;
 
       Cookies.set("AccessToken", AccessToken);
+      Cookies.set("PersonID", PersonID);
 
       dispatch(setAuth({ AccessToken }));
 

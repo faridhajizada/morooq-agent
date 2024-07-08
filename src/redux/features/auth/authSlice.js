@@ -4,13 +4,17 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     AccessToken: "",
+    PersonID: "",
   },
   reducers: {
     setAuth: (state, action) => {
       state.AccessToken = action.payload.AccessToken;
+      state.PersonID = action.payload.PersonID;
     },
     logout: (state) => {
       state.AccessToken = "";
+      state.PersonID = "";
+
     },
   },
 });

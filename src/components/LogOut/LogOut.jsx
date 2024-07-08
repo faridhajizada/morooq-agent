@@ -8,8 +8,14 @@ function LogoutButton() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    const allCookies = Cookies.get();
+
+    Object.keys(allCookies).forEach((cookieName) => {
+      Cookies.remove(cookieName, { path: "" });
+      Cookies.remove(cookieName, { path: "", domain: "localhost" });
+    });
+
     dispatch(logout());
-    Cookies.remove("AccessToken");
     navigate("/");
   };
 
@@ -25,7 +31,7 @@ function LogoutButton() {
       }}
       onClick={handleLogout}
     >
-      Sing out
+      Sign out
     </button>
   );
 }

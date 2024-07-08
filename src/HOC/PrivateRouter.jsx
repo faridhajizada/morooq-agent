@@ -7,10 +7,8 @@ function PrivateRouter({ children }) {
   const isAuthenticated = useSelector((state) => {
     return state.auth.AccessToken;
   });
-  console.log('🚀 ~ isAuthenticated ~  isAuthenticated:', isAuthenticated);
 
   const AccessToken = Cookies.get('AccessToken');
-  console.log('🚀 ~ PrivateRouter ~  AccessToken:', AccessToken);
 
   if (!AccessToken) {
     return <Navigate to="/" />;

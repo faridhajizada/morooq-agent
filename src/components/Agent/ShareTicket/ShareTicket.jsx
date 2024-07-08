@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useExamsQuery } from "./../../../api/exams";
+import Cookies from "js-cookie";
 import s from "./ShareTicket.module.scss";
 
 function ShareTicket() {
@@ -13,12 +14,14 @@ function ShareTicket() {
   const [availableTickets, setAvailableTickets] = useState(424);
   const [eventItems, setEventItems] = useState([]);
 
+  let agentId = Cookies.get("PersonID");
+
   const handleExamChange = async (e) => {
     const examId = e.target.value;
     setSelectedExam(examId);
 
     const response = await fetch(
-      `http://morooq.az/webservice/api/acquiredTicket/shareableTickets?agentId=8&examId=${examId}`,
+      `http://morooq.az/webservice/api/acquiredTicket/shareableTickets?agentId=${agentId}&examId=${examId}`,
       {
         method: "POST",
         headers: {
