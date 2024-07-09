@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import { useExamsQuery, useEventItemsQuery } from "./../../../api/exams";
+import Cookies from "js-cookie";
 import s from "./AcquireTicket.module.scss";
 
 function AcquireTicket() {
   const { data: exams } = useExamsQuery();
   const [selectedExam, setSelectedExam] = useState("");
   const [quantities, setQuantities] = useState({});
+  const agentId = 8;
+  const country = "AZ";
+
+  let token = Cookies.get("AccessToken");
 
   const { data: eventItems } = useEventItemsQuery(selectedExam, {
     skip: !selectedExam,
@@ -36,6 +41,56 @@ function AcquireTicket() {
     }
   }, [eventItems]);
 
+  const handleAcquire = async () => {
+    const eventItemList = eventItems.map((item) => ({
+      EventItemID: item.EventItemID,
+      EventItemPrice: item.EventItemPrice,
+      Quantity: quantities[item.EventItemID] || 0,
+    }));
+
+    console.log(
+      "Request Body:",
+      JSON.stringify({
+        eventItemList,
+        agentId,
+        examId: selectedExam,
+        country,
+      })
+    );
+
+    try {
+      const response = await fetch(
+        `http://morooq.az/webservice/api/payments/agent/ticket/checkout?agentId=${agentId}&examId=${selectedExam}&country=${country}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+            // "Authorization": "Basic " + btoa("contact@faridhajizada.com:contact@faridhajizada.com."), 
+
+          },
+          body: JSON.stringify({
+            eventItemList,
+          }),
+        }
+      );
+
+      console.log("Response:", response);
+
+      if (response.ok) {
+        alert("You have successfully acquired the tickets.");
+      } else {
+        const errorData = await response.json();
+        console.error("Error:", errorData);
+        alert("Failed to acquire tickets.");
+      }
+    } catch (error) {
+      console.error("Network Error:", error);
+      alert("Network error. Failed to acquire tickets.");
+    }
+  };
+
   return (
     <div className={s.acquireTicket}>
       <div className={s.pageHeader}>
@@ -45,27 +100,46 @@ function AcquireTicket() {
       </div>
 
       <div className={s.card}>
-        <label htmlFor="exam" style={{ fontSize: "20px", marginRight: "30px" }}>
-          Exam
-        </label>
-        <select
-          id="exam"
-          name="exam"
-          value={selectedExam}
-          onChange={handleExamChange}
-          style={{ fontSize: "20px" }}
-        >
-          <option value="" label="Choose exam" disabled></option>
-          {exams?.map((exam) => (
-            <option key={exam.examid} value={exam.examid}>
-              {exam.Name}
-            </option>
-          ))}
-        </select>
+        <div className={s.labelSelect}>
+          <label
+            htmlFor="exam"
+            style={{ fontSize: "20px", marginRight: "30px" }}
+          >
+            Exam
+          </label>
+          <select
+            id="exam"
+            name="exam"
+            value={selectedExam}
+            onChange={handleExamChange}
+            style={{ fontSize: "20px" }}
+          >
+            <option value="" label="Choose exam" disabled></option>
+            {exams?.map((exam) => (
+              <option key={exam.examid} value={exam.examid}>
+                {exam.Name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {eventItems && eventItems.length > 0 && (
-          <div>
-            <div>Total amount: ${calculateTotalAmount()}</div>
-            <button className={s.acquireBtn}>Acquire</button>
+          <div className={s.totalAndAcquireBtn}>
+            <div className={s.btn}>
+              <button className={s.acquireBtn} onClick={handleAcquire}>
+                Acquire
+              </button>
+            </div>
+            <div className={s.totalAmount}>
+              <p>Total amount: ${calculateTotalAmount()}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className={s.tableCard}>
+        {eventItems && eventItems.length > 0 && (
+          <div className={s.card}>
             <table>
               <thead>
                 <tr style={{ textAlign: "center" }}>

@@ -8,7 +8,7 @@ function ShareTicket() {
   const [selectedExam, setSelectedExam] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("English");
   const [tickets, setTickets] = useState([
-    { firstName: "", lastName: "", email: "", quantity: 1 },
+    { firstName: "", lastName: "", email: "", quantity: 0 },
   ]);
   const [ticketCost, setTicketCost] = useState(8);
   const [availableTickets, setAvailableTickets] = useState(424);
