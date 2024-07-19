@@ -32,7 +32,7 @@ function SignIn() {
     } catch (error) {
       console.error("Error:", error);
 
-      if (error.response && error.response.status === 401) {
+      if (error.response && error.response.status === 401 || error.response.status === 400  ) {
         setError("Invalid email or password");
       } else {
         setError("Error logging in, please try again later");

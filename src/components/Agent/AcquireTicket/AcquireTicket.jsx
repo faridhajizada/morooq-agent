@@ -82,10 +82,21 @@ function AcquireTicket() {
         alert("You have successfully acquired the tickets.");
       } else {
         const errorData = await response.json();
+
         console.error("Error:", errorData);
         alert("Failed to acquire tickets.");
       }
     } catch (error) {
+      if (response.status === 401) {
+        console.error("Unauthorized");
+      } else if (response.status === 400) {
+        console.error("Bad Request");
+      } else if (response.status === 500) {
+        console.error("Internal Server Error");
+      } else if (response.status === 404) {
+        console.error("Not Found");
+      }
+      
       console.error("Network Error:", error);
       alert("Network error. Failed to acquire tickets.");
     }
