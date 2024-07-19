@@ -7,10 +7,10 @@ function AcquireTicket() {
   const { data: exams } = useExamsQuery();
   const [selectedExam, setSelectedExam] = useState("");
   const [quantities, setQuantities] = useState({});
-  const agentId = 8;
+  const agentId = Cookies.get("PersonID");
   const country = "AZ";
 
-  let token = Cookies.get("AccessToken");
+  const token = Cookies.get("token");
 
   const { data: eventItems } = useEventItemsQuery(selectedExam, {
     skip: !selectedExam,
@@ -47,6 +47,7 @@ function AcquireTicket() {
       EventItemPrice: item.EventItemPrice,
       Quantity: quantities[item.EventItemID] || 0,
     }));
+    console.log("Event Item List:", eventItemList);
 
     console.log(
       "Request Body:",
@@ -67,8 +68,7 @@ function AcquireTicket() {
             "Content-Type": "application/json",
             Accept: "application/json",
             Authorization: `Bearer ${token}`,
-            // "Authorization": "Basic " + btoa("contact@faridhajizada.com:contact@faridhajizada.com."), 
-
+            // "Authorization": "Basic " + btoa("contact@faridhajizada.com:contact@faridhajizada.com."),
           },
           body: JSON.stringify({
             eventItemList,
