@@ -7,10 +7,10 @@ function AcquireTicket() {
   const { data: exams } = useExamsQuery();
   const [selectedExam, setSelectedExam] = useState("");
   const [quantities, setQuantities] = useState({});
+  const token = Cookies.get("AccessToken");
   const agentId = Cookies.get("PersonID");
   const country = "AZ";
 
-  const token = Cookies.get("token");
 
   const { data: eventItems } = useEventItemsQuery(selectedExam, {
     skip: !selectedExam,
@@ -96,7 +96,7 @@ function AcquireTicket() {
       } else if (response.status === 404) {
         console.error("Not Found");
       }
-      
+
       console.error("Network Error:", error);
       alert("Network error. Failed to acquire tickets.");
     }
