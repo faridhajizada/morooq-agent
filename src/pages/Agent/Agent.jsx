@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Agent/Header/Header";
 import AcquireTicket from "../../components/Agent/AcquireTicket/AcquireTicket";
 import ShareTicket from "../../components/Agent/ShareTicket/ShareTicket";
+import StripeAcquisition from "../../components/Agent/StripeAcquisition/StripeAcquisition";
 
 import s from "./Agent.module.scss";
 
@@ -23,6 +24,7 @@ function Agent() {
                   <Route path="/" element={<AcquireTicket />} />
                   <Route path="/acquire-tickets" element={<AcquireTicket />} />
                   <Route path="/share-tickets" element={<ShareTicket />} />
+                  <Route path="/stripe-acquisition" element={<StripeAcquisition />} />
                 </Routes>
               </Col>
             </Row>

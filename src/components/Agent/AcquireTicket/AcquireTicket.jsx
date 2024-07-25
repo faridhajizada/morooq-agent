@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useExamsQuery, useEventItemsQuery } from "./../../../api/exams";
 import Cookies from "js-cookie";
 import s from "./AcquireTicket.module.scss";
+import { useNavigate } from "react-router-dom";
 
 function AcquireTicket() {
   const { data: exams } = useExamsQuery();
@@ -10,7 +11,7 @@ function AcquireTicket() {
   const token = Cookies.get("AccessToken");
   const agentId = Cookies.get("PersonID");
   const country = "AZ";
-
+  const navigate = useNavigate();
 
   const { data: eventItems } = useEventItemsQuery(selectedExam, {
     skip: !selectedExam,
@@ -42,22 +43,17 @@ function AcquireTicket() {
   }, [eventItems]);
 
   const handleAcquire = async () => {
-    const eventItemList = eventItems.map((item) => ({
-      EventItemID: item.EventItemID,
-      EventItemPrice: item.EventItemPrice,
-      Quantity: quantities[item.EventItemID] || 0,
-    }));
-    console.log("Event Item List:", eventItemList);
-
-    console.log(
-      "Request Body:",
-      JSON.stringify({
-        eventItemList,
-        agentId,
-        examId: selectedExam,
-        country,
-      })
-    );
+    const eventItemList = eventItems
+      .map((item) => ({
+        EventItemID: item.EventItemID,
+        EventItemPrice: item.EventItemPrice,
+        Quantity: quantities[item.EventItemID] || 0,
+      }))
+      .filter((item) => item.Quantity > 0);
+    if (eventItemList.length === 0) {
+      alert("Please select at least one ticket.");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -68,35 +64,24 @@ function AcquireTicket() {
             "Content-Type": "application/json",
             Accept: "application/json",
             Authorization: `Bearer ${token}`,
-            // "Authorization": "Basic " + btoa("contact@faridhajizada.com:contact@faridhajizada.com."),
           },
-          body: JSON.stringify({
-            eventItemList,
-          }),
+          body: JSON.stringify(eventItemList),
         }
       );
 
-      console.log("Response:", response);
+      const responseBody = await response.json();
+      console.log("Response Status:", response.status);
+      console.log("Response Body:", JSON.stringify(responseBody, null, 2));
 
       if (response.ok) {
-        alert("You have successfully acquired the tickets.");
+        navigate("/agent/stripe-acquisition", {
+          state: { paymentId: responseBody.PaymentId },
+        });
       } else {
-        const errorData = await response.json();
-
-        console.error("Error:", errorData);
+        console.error("Error:", responseBody);
         alert("Failed to acquire tickets.");
       }
     } catch (error) {
-      if (response.status === 401) {
-        console.error("Unauthorized");
-      } else if (response.status === 400) {
-        console.error("Bad Request");
-      } else if (response.status === 500) {
-        console.error("Internal Server Error");
-      } else if (response.status === 404) {
-        console.error("Not Found");
-      }
-
       console.error("Network Error:", error);
       alert("Network error. Failed to acquire tickets.");
     }
