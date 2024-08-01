@@ -38,6 +38,14 @@ const sidebarData = [
 function Sidebar() {
   return (
     <div className={s.sidebar}>
+      <div className={s.personInfo}>
+        <div className={s.personImg}>
+          <img src="https://app.morooq.com/Content/AdminContent/image/user.svg" />
+        </div>
+        <div className={s.personName}>
+          <h5>Farid Hajizada</h5>
+        </div>
+      </div>
       <ul className={s.sidebar__list}>
         {sidebarData.map((item) => (
           <li key={item.id} className={s.sidebar__item}>

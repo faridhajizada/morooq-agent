@@ -151,20 +151,24 @@ function AcquireTicket() {
                 {eventItems.map((item) => (
                   <tr key={item.EventItemID}>
                     <td>{item.EventItemID}</td>
-                    <td>{item.EventItemDesc}</td>
-                    <td>${item.TicketPrice}</td>
-                    <td>${item.EventItemPrice}</td>
-                    <td>
+                    <td>{item.EventItemDescription}</td>
+                    <td style={{ textAlign: "center" }}>
+                      {item.EventItemPrice}
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      {item.PackageItemPrice}
+                    </td>
+                    <td style={{ textAlign: "center" }}>
                       <input
                         type="number"
                         name={item.EventItemID}
                         value={quantities[item.EventItemID] || 0}
                         onChange={handleQuantityChange}
                         min="0"
+                        style={{ width: "50px", textAlign: "center" }}
                       />
                     </td>
-                    <td>
-                      $
+                    <td style={{ textAlign: "center" }}>
                       {(quantities[item.EventItemID] || 0) *
                         item.EventItemPrice}
                     </td>

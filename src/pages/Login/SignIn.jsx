@@ -25,14 +25,16 @@ function SignIn() {
 
       Cookies.set("AccessToken", AccessToken);
       Cookies.set("PersonID", PersonID);
-
       dispatch(setAuth({ AccessToken }));
 
       navigate("/agent");
     } catch (error) {
       console.error("Error:", error);
 
-      if (error.response && error.response.status === 401 || error.response.status === 400  ) {
+      if (
+        (error.response && error.response.status === 401) ||
+        error.response.status === 400
+      ) {
         setError("Invalid email or password");
       } else {
         setError("Error logging in, please try again later");

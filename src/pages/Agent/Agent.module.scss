@@ -5,3 +5,10 @@ main {
     padding: 0 !important;
   }
 }
+.main {
+  min-height: calc(100vh - 90px);
+  .col {
+    padding-right: calc(var(--bs-gutter-x) * 0);
+    padding-left: calc(var(--bs-gutter-x) * 0);
+  }
+}

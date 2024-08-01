@@ -1,0 +1,19 @@
+footer {
+  .footerContent {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #2f333e;
+    color: #fff;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+    p {
+      font-family: "avenir-next-regular", sans-serif;
+      font-size: 14px;
+      color: #ffffffe6;
+      margin: 0;
+    }
+  }
+}

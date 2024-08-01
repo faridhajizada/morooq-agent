@@ -1,7 +1,8 @@
 .sidebar {
   background: whitesmoke;
   color: #686a76;
-  height: 100vh;
+  // height: 100vh;
+  min-height: calc(100vh - 70px);
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 
@@ -24,6 +25,17 @@
         background: linear-gradient(45deg, #a9508a, #ec2a7b);
         color: white;
       }
+    }
+  }
+  .personInfo {
+    display: flex;
+    align-items: center;
+    padding: 30px 15px;
+    .personImg {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
     }
   }
 }
