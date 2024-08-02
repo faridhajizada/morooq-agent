@@ -1,6 +1,7 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import './PersonalDetails.module.scss';
 
 const PersonalDetails = () => {
   const { handleSubmit, control } = useForm();
@@ -10,7 +11,7 @@ const PersonalDetails = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} className="personal-details-form">
       <Row>
         <Col md={6}>
           <Form.Group controlId="formFirstName">
@@ -99,13 +100,16 @@ const PersonalDetails = () => {
         />
       </Form.Group>
 
-      <Form.Group>
-        <Button type="submit" variant="primary">
-          Update
-        </Button>
+      <Form.Group controlId="formFile">
+        <Form.Label>Upload File</Form.Label>
+        <Form.Control type="file" />
       </Form.Group>
 
-      <Form.Group controlId="formChangePassword">
+      <Button type="submit" variant="primary" className="update-button">
+        Update
+      </Button>
+
+      <Form.Group controlId="formChangePassword" className="mt-3">
         <Controller
           name="changePassword"
           control={control}

@@ -1,0 +1,20 @@
+.personal-details-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-button {
+  display: block;
+  width: 100%;
+  background-color: #e83e8c;
+  border-color: #e83e8c;
+}
+
+.update-button:hover {
+  background-color: #d63384;
+  border-color: #d63384;
+}
