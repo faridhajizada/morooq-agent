@@ -71,11 +71,11 @@ function AcquireTicket() {
 
       const responseBody = await response.json();
       console.log("Response Status:", response.status);
-      console.log("Response Body:", JSON.stringify(responseBody, null, 2));
+      console.log("Response Body----:", JSON.stringify(responseBody, null, 2));
 
-      if (response.ok) {
+      if (response.ok && responseBody) {
         navigate("/agent/stripe-acquisition", {
-          state: { paymentId: responseBody.PaymentId },
+          state: { responseBody }, // Pass responseBody to the state object
         });
       } else {
         console.error("Error:", responseBody);

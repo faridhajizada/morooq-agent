@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import s from "./Sidebar.module.scss";
 
@@ -36,11 +37,19 @@ const sidebarData = [
 ];
 
 function Sidebar() {
+  const [activeItem, setActiveItem] = useState(1);
+
+  const handleItemClick = (id) => {
+    setActiveItem(id);
+  };
   return (
     <div className={s.sidebar}>
       <div className={s.personInfo}>
         <div className={s.personImg}>
-          <img src="https://app.morooq.com/Content/AdminContent/image/user.svg" />
+          <img
+            src="https://app.morooq.com/Content/AdminContent/image/user.svg"
+            alt="User"
+          />
         </div>
         <div className={s.personName}>
           <h5>Farid Hajizada</h5>
@@ -48,7 +57,13 @@ function Sidebar() {
       </div>
       <ul className={s.sidebar__list}>
         {sidebarData.map((item) => (
-          <li key={item.id} className={s.sidebar__item}>
+          <li
+            key={item.id}
+            className={`${s.sidebar__item} ${
+              activeItem === item.id ? s.active : ""
+            }`}
+            onClick={() => handleItemClick(item.id)}
+          >
             <Link to={item.path}>
               <p>{item.name}</p>
             </Link>

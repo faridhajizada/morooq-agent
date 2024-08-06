@@ -6,7 +6,7 @@ function Footer() {
     <footer>
       <div className={s.footerContent}>
         <div className={s.left}>
-          <p>morooq © 2018-2019</p>
+          <p>morooq © 2018-2024</p>
         </div>
         <div className={s.right}>
           <p>Created by benzeine</p>

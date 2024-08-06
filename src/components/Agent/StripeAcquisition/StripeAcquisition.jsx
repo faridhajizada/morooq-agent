@@ -1,52 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+import { useLocation } from "react-router-dom";
 
-const stripePromise = loadStripe('YOUR_PUBLISHABLE_KEY'); // replace with your actual Stripe publishable key
+const stripePromise = loadStripe("YOUR_PUBLISHABLE_KEY"); // replace with your actual Stripe publishable key
 
-const StripeAcquisition = ({ paymentId }) => {
-  const [clientSecret, setClientSecret] = useState('');
+const StripeAcquisition = () => {
+  const [clientSecret, setClientSecret] = useState("");
+  const location = useLocation();
+  const responseBody = location.state?.responseBody;
+
+  console.log("responseBody.AgentOrderId", responseBody.AgentOrderId);
+  console.log("responseBody.PaymentId", responseBody.PaymentId);
+  console.log("responseBody.StripePaymentId", responseBody.StripePaymentId);
 
   useEffect(() => {
-    if (paymentId) {
-      const fetchClientSecret = async () => {
-        try {
-          const response = await fetch(`http://morooq.az/webservice/api/payments/agent/ticket/pay`, {
-            method: 'POST',
+    const fetchClientSecret = async () => {
+      try {
+        const response = await fetch(
+          `http://morooq.az/webservice/api/payments/agent/ticket/pay?statusId=successed`,
+          {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              PaymentId: paymentId,
-              StripePaymentId: paymentId, // Use the correct ID
-              AgentOrderId: paymentId, // Use the correct ID
-              statusId: 'your-status-id' // replace with actual statusId
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+              responseBody,
+            }),
           }
+        );
 
-          const data = await response.json();
-          setClientSecret(data.clientSecret);
-        } catch (error) {
-          console.error('Error fetching client secret:', error);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-      };
 
-      fetchClientSecret();
-    }
-  }, [paymentId]);
+        const data = await response.json();
+        setClientSecret(data.clientSecret);
+        console.log("Client Secret:", data.clientSecret);
+      } catch (error) {
+        console.error("Error fetching client secret:", error);
+      }
+    };
 
+    fetchClientSecret();
+  }, []);
+
+  const appearance = {
+    theme: "night",
+    labels: "floating",
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
   return (
     <div>
-      {clientSecret && (
+      {
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
         </Elements>
-      )}
+      }
     </div>
   );
 };
