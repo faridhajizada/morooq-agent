@@ -9,6 +9,7 @@ import StripeAcquisition from "../../components/Agent/StripeAcquisition/StripeAc
 
 import s from "./Agent.module.scss";
 import PersonalDetails from "../../components/Agent/PersonalDetails/PersonalDetails";
+import MySharings from "../../components/Agent/MySharings/MySharings";
 
 function Agent() {
   return (
@@ -38,6 +39,7 @@ function Agent() {
                     path="/personal-details"
                     element={<PersonalDetails />}
                   />
+                  <Route path="/my-sharings" element={<MySharings />} />
                 </Routes>
                 <Footer />
               </Col>

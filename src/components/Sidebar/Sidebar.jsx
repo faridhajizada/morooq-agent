@@ -15,8 +15,8 @@ const sidebarData = [
   },
   {
     id: 3,
-    name: "My shared tickets",
-    path: "/agent/my-shared-tickets",
+    name: "My sharings",
+    path: "/agent/my-sharings",
   },
   {
     id: 4,
