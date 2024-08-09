@@ -1,26 +1,25 @@
-import { Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react";
 import LogOut from "./../../LogOut/LogOut";
-import s from "./Header.module.scss";
+import "./Header.scss";
 
-function Header() {
+const Header = React.memo(() => {
   return (
     <header>
-      <Container fluid>
-        <Row>
-          <div className={s.header}>
-            <div className={s.title}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="header">
+            <div className="title">
               <strong>morooq</strong>
               <span>exams</span>
             </div>
-            <div className={s.userInfo}>
+            <div className="userInfo">
               <LogOut />
             </div>
           </div>
-        </Row>
-      </Container>
+        </div>
+      </div>
     </header>
   );
-}
+});
 
 export default Header;
