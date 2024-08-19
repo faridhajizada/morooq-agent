@@ -70,12 +70,11 @@ function AcquireTicket() {
       );
 
       const responseBody = await response.json();
-      console.log("Response Status:", response.status);
       console.log("Response Body----:", JSON.stringify(responseBody, null, 2));
 
       if (response.ok && responseBody) {
         navigate("/agent/stripe-acquisition", {
-          state: { responseBody }, // Pass responseBody to the state object
+          state: { responseBody },
         });
       } else {
         console.error("Error:", responseBody);
