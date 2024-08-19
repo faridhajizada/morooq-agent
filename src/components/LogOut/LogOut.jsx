@@ -30,9 +30,17 @@ const Logout = React.memo(() => {
   }, [dispatch, navigate]);
 
   return (
-    <button className="logout-button" onClick={handleLogout}>
-      Sign out
-    </button>
+    <>
+      <button className="logout-button" onClick={handleLogout}>
+        Sign out
+      </button>
+      <img
+        width="20"
+        height="20"
+        src="https://img.icons8.com/pixels/32/FFFFFF/exit.png"
+        alt="exit"
+      />
+    </>
   );
 });
 

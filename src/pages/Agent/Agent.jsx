@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Agent/Header/Header";
 import Footer from "../../components/Agent/Footer/Footer";
 import React, { lazy, Suspense } from "react";
-import  "./Agent.scss";
+import "./Agent.scss";
 
 const AcquireTicket = lazy(() =>
   import("../../components/Agent/AcquireTicket/AcquireTicket")
@@ -30,10 +30,10 @@ function Agent() {
         <section>
           <div className="container-fluid">
             <div className="row">
-              <div className="col-2">
+              <div className="col col-2">
                 <Sidebar />
               </div>
-              <div className="col-10" style={{ backgroundColor: "white" }}>
+              <div className="col col-10" style={{ backgroundColor: "white" }}>
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
                     <Route path="/" element={<AcquireTicket />} />

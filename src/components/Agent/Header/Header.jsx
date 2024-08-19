@@ -11,6 +11,12 @@ const Header = React.memo(() => {
             <div className="title">
               <strong>morooq</strong>
               <span>exams</span>
+              <img
+                width="30"
+                height="20"
+                src="https://img.icons8.com/hatch/64/FFFFFF/menu.png"
+                alt="menu"
+              />
             </div>
             <div className="userInfo">
               <LogOut />
