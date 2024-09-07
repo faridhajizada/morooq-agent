@@ -1,0 +1,40 @@
+.stripe-container {
+  padding: 2rem;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+}
+
+.payment-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-card .card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card-element {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-element {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.75rem;
+  }
+  
+  .checkout-form {
+    display: flex;
+    flex-direction: column;
+  }
+  

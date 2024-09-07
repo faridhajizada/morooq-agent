@@ -7,63 +7,40 @@ import { useLocation } from "react-router-dom";
 const stripePromise = loadStripe("pk_test_mAu0YX27q4uYAhqiP6LXOFhj");
 
 const StripeAcquisition = () => {
-  const [clientSecret, setClientSecret] = useState("");
-
   const location = useLocation();
   const responseBody = location.state?.responseBody;
+  const [clientSecret, setClientSecret] = useState("");
+  const [paymentIntendId, setPaymentIntendId] = useState("");
 
-  console.log("responseBody.AgentOrderId", responseBody.AgentOrderId);
-  console.log("responseBody.PaymentId", responseBody.PaymentId);
-  console.log("responseBody.StripePaymentId", responseBody.StripePaymentId);
+  useEffect(() => {
+    if (responseBody) {
+      setClientSecret(responseBody.ClientSecret);
+      setPaymentIntendId(responseBody.PaymentIntentId);
+    }
+  }, [responseBody]);
 
-  // useEffect(() => {
-  //   const fetchClientSecret = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `http://morooq.az/webservice/api/payments/agent/ticket/pay?statusId=1`,
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({
-  //             responseBody,
-  //           }),
-  //         }
-  //       );
-
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-
-  //       const data = await response.json();
-  //       setClientSecret(data?.clientSecret);
-  //       console.log("Client Secret:", data?.clientSecret);
-  //     } catch (error) {
-  //       console.error("Error fetching client secret:", error);
-  //     }
-  //   };
-
-  //   fetchClientSecret();
-  // }, []);
+  console.log("responseBody.AgentOrderId", responseBody?.AgentOrderId);
+  console.log("responseBody.PaymentId", responseBody?.PaymentId);
+  console.log("responseBody.StripePaymentId", responseBody?.StripePaymentId);
+  console.log("responseBody.PaymentIntentId", responseBody?.PaymentIntentId);
+  console.log("responseBody.ClientSecret", responseBody?.ClientSecret);
 
   const appearance = {
     theme: "night",
     labels: "floating",
   };
   const options = {
-    // clientSecret,
+    clientSecret,
     appearance,
   };
+
   return (
     <div>
-      {
+      {clientSecret && (
         <Elements stripe={stripePromise} options={options}>
-          <CheckoutForm />
+          <CheckoutForm paymentId={paymentIntendId} />
         </Elements>
-      }
-
-      <p>salam</p>
+      )}
     </div>
   );
 };

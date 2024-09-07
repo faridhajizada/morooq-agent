@@ -1,12 +1,34 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import PrivateRouter from "./HOC/PrivateRouter";
 import Login from "./pages/Login/Login";
-import Agent from "./pages/Agent/Agent";
-import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
-import SendEmailForgotPassword from "./pages/Login/SendEmailForgotPassword";
-import ValidResetPassword from "./pages/Login/ValidResetPassword";
-import ChangeForgotPassword from "./pages/Login/ChangeForgotPassword";
+// import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+// import Agent from "./pages/Agent/Agent";
+// import SendEmailForgotPassword from "./pages/Login/SendEmailForgotPassword";
+// import ValidResetPassword from "./pages/Login/ValidResetPassword";
+// import ChangeForgotPassword from "./pages/Login/ChangeForgotPassword";
+import React, { lazy, Suspense } from "react";
 
+const SendEmailForgotPassword = lazy(() =>
+  import("./pages/Login/SendEmailForgotPassword")
+);
+
+const ValidResetPassword = lazy(() =>
+  import("./pages/Login/ValidResetPassword")
+);
+
+const ChangeForgotPassword = lazy(() =>
+  import("./pages/Login/ChangeForgotPassword")
+);
+
+const Agent = lazy(() => import("./pages/Agent/Agent"));
+
+const NotFoundPage = lazy(() =>
+  import("./components/NotFoundPage/NotFoundPage")
+);
+
+const PaymentStatus = lazy(() =>
+  import("./components/Agent/StripeAcquisition/PaymentStatus")
+);
 import "./App.css";
 
 function App() {
@@ -14,6 +36,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/status" element={<PaymentStatus />} />
         <Route
           path="/send-email-forgot-password"
           element={<SendEmailForgotPassword />}

@@ -5,6 +5,9 @@ import s from "./AcquireTicket.module.scss";
 import { useNavigate } from "react-router-dom";
 
 function AcquireTicket() {
+  const [clientSecret, setClientSecret] = useState("");
+  const [paymentIntendId, setPaymentIntendID] = useState("");
+
   const { data: exams } = useExamsQuery();
   const [selectedExam, setSelectedExam] = useState("");
   const [quantities, setQuantities] = useState({});
@@ -50,6 +53,7 @@ function AcquireTicket() {
         Quantity: quantities[item.EventItemID] || 0,
       }))
       .filter((item) => item.Quantity > 0);
+
     if (eventItemList.length === 0) {
       alert("Please select at least one ticket.");
       return;
@@ -72,7 +76,10 @@ function AcquireTicket() {
       const responseBody = await response.json();
       console.log("Response Body----:", JSON.stringify(responseBody, null, 2));
 
-      if (response.ok && responseBody) {
+      setClientSecret(responseBody.ClientSecret);
+      setPaymentIntendID(responseBody.PaymentIntentId);
+
+      if (response.ok && responseBody && responseBody.ClientSecret) {
         navigate("/agent/stripe-acquisition", {
           state: { responseBody },
         });
