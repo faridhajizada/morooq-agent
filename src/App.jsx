@@ -35,8 +35,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/status" element={<PaymentStatus />} />
+        <Route path="/"  element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/agent/status" element={<PaymentStatus />} />
         <Route
           path="/send-email-forgot-password"
           element={<SendEmailForgotPassword />}

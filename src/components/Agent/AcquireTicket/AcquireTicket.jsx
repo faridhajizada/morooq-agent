@@ -74,6 +74,7 @@ function AcquireTicket() {
       );
 
       const responseBody = await response.json();
+      console.log("responseBody", responseBody);
       console.log("Response Body----:", JSON.stringify(responseBody, null, 2));
 
       setClientSecret(responseBody.ClientSecret);

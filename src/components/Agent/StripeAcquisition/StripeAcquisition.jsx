@@ -9,6 +9,8 @@ const stripePromise = loadStripe("pk_test_mAu0YX27q4uYAhqiP6LXOFhj");
 const StripeAcquisition = () => {
   const location = useLocation();
   const responseBody = location.state?.responseBody;
+
+  console.log("---responseBody---", responseBody);
   const [clientSecret, setClientSecret] = useState("");
   const [paymentIntendId, setPaymentIntendId] = useState("");
 
@@ -19,11 +21,14 @@ const StripeAcquisition = () => {
     }
   }, [responseBody]);
 
-  console.log("responseBody.AgentOrderId", responseBody?.AgentOrderId);
-  console.log("responseBody.PaymentId", responseBody?.PaymentId);
-  console.log("responseBody.StripePaymentId", responseBody?.StripePaymentId);
-  console.log("responseBody.PaymentIntentId", responseBody?.PaymentIntentId);
-  console.log("responseBody.ClientSecret", responseBody?.ClientSecret);
+  useEffect(() => {
+    if (responseBody) {
+      localStorage.setItem("PaymentId", responseBody.PaymentId);
+      localStorage.setItem("StripePaymentId", responseBody.StripePaymentId);
+      localStorage.setItem("AgentOrderId", responseBody.AgentOrderId);
+      localStorage.setItem("PaymentIntentId", responseBody.PaymentIntentId);
+    }
+  }, [responseBody]);
 
   const appearance = {
     theme: "night",
